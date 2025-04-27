@@ -123,6 +123,161 @@ var (
 		nil, nil,
 	)
 
+	// collectDishGPS
+	dishGpsValid = prometheus.NewDesc(
+		prometheus.BuildFQName(namespace, "dish", "gps_valid"),
+		"GPS signal validity status",
+		nil, nil,
+	)
+	dishGpsSats = prometheus.NewDesc(
+		prometheus.BuildFQName(namespace, "dish", "gps_satellites"),
+		"Number of GPS satellites in view",
+		nil, nil,
+	)
+	dishNoSatsAfterTtff = prometheus.NewDesc(
+		prometheus.BuildFQName(namespace, "dish", "no_sats_after_ttff"),
+		"No satellites after time to first fix",
+		nil, nil,
+	)
+	dishInhibitGps = prometheus.NewDesc(
+		prometheus.BuildFQName(namespace, "dish", "inhibit_gps"),
+		"GPS inhibited status",
+		nil, nil,
+	)
+
+	// collectDishAlignment
+	dishTiltAngleDeg = prometheus.NewDesc(
+		prometheus.BuildFQName(namespace, "dish", "tilt_angle_deg"),
+		"Tilt angle in degrees",
+		nil, nil,
+	)
+	dishDesiredBoreSightAzimuthDeg = prometheus.NewDesc(
+		prometheus.BuildFQName(namespace, "dish", "desired_bore_sight_azimuth_deg"),
+		"Desired azimuth in degrees",
+		nil, nil,
+	)
+	dishDesiredBoreSightElevationDeg = prometheus.NewDesc(
+		prometheus.BuildFQName(namespace, "dish", "desired_bore_sight_elevation_deg"),
+		"Desired elevation in degrees",
+		nil, nil,
+	)
+	dishActuatorState = prometheus.NewDesc(
+		prometheus.BuildFQName(namespace, "dish", "actuator_state"),
+		"Actuator state",
+		nil, nil,
+	)
+	dishAttitudeEstimationState = prometheus.NewDesc(
+		prometheus.BuildFQName(namespace, "dish", "attitude_estimation_state"),
+		"Attitude estimation state",
+		nil, nil,
+	)
+	dishAttitudeUncertaintyDeg = prometheus.NewDesc(
+		prometheus.BuildFQName(namespace, "dish", "attitude_uncertainty_deg"),
+		"Attitude uncertainty in degrees",
+		nil, nil,
+	)
+
+	// collectDishReadyStates
+	dishReadyStateCady = prometheus.NewDesc(
+		prometheus.BuildFQName(namespace, "dish", "ready_state_cady"),
+		"Cady ready state",
+		nil, nil,
+	)
+	dishReadyStateScp = prometheus.NewDesc(
+		prometheus.BuildFQName(namespace, "dish", "ready_state_scp"),
+		"SCP ready state",
+		nil, nil,
+	)
+	dishReadyStateL1L2 = prometheus.NewDesc(
+		prometheus.BuildFQName(namespace, "dish", "ready_state_l1l2"),
+		"L1L2 ready state",
+		nil, nil,
+	)
+	dishReadyStateXphy = prometheus.NewDesc(
+		prometheus.BuildFQName(namespace, "dish", "ready_state_xphy"),
+		"XPHY ready state",
+		nil, nil,
+	)
+	dishReadyStateAap = prometheus.NewDesc(
+		prometheus.BuildFQName(namespace, "dish", "ready_state_aap"),
+		"AAP ready state",
+		nil, nil,
+	)
+	dishReadyStateRf = prometheus.NewDesc(
+		prometheus.BuildFQName(namespace, "dish", "ready_state_rf"),
+		"RF ready state",
+		nil, nil,
+	)
+
+	// collectDishSoftwareUpdate
+	dishSoftwareUpdateState = prometheus.NewDesc(
+		prometheus.BuildFQName(namespace, "dish", "software_update_state"),
+		"Software update state",
+		nil, nil,
+	)
+	dishSoftwareUpdateProgress = prometheus.NewDesc(
+		prometheus.BuildFQName(namespace, "dish", "software_update_progress"),
+		"Software update progress (0-1)",
+		nil, nil,
+	)
+	dishUpdateRequiresReboot = prometheus.NewDesc(
+		prometheus.BuildFQName(namespace, "dish", "update_requires_reboot"),
+		"Update requires reboot",
+		nil, nil,
+	)
+
+	// collectDishInitialization
+	dishInitAttitudeSeconds = prometheus.NewDesc(
+		prometheus.BuildFQName(namespace, "dish", "init_attitude_seconds"),
+		"Attitude initialization time in seconds",
+		nil, nil,
+	)
+	dishInitBurstDetectedSeconds = prometheus.NewDesc(
+		prometheus.BuildFQName(namespace, "dish", "init_burst_detected_seconds"),
+		"Burst detection time in seconds",
+		nil, nil,
+	)
+	dishInitEkfConvergedSeconds = prometheus.NewDesc(
+		prometheus.BuildFQName(namespace, "dish", "init_ekf_converged_seconds"),
+		"EKF convergence time in seconds",
+		nil, nil,
+	)
+	dishInitFirstCplaneSeconds = prometheus.NewDesc(
+		prometheus.BuildFQName(namespace, "dish", "init_first_cplane_seconds"),
+		"First CPLANE time in seconds",
+		nil, nil,
+	)
+	dishInitFirstPopPingSeconds = prometheus.NewDesc(
+		prometheus.BuildFQName(namespace, "dish", "init_first_pop_ping_seconds"),
+		"First POP ping time in seconds",
+		nil, nil,
+	)
+	dishInitGpsValidSeconds = prometheus.NewDesc(
+		prometheus.BuildFQName(namespace, "dish", "init_gps_valid_seconds"),
+		"GPS valid time in seconds",
+		nil, nil,
+	)
+	dishInitNetworkEntrySeconds = prometheus.NewDesc(
+		prometheus.BuildFQName(namespace, "dish", "init_network_entry_seconds"),
+		"Network entry time in seconds",
+		nil, nil,
+	)
+	dishInitNetworkScheduleSeconds = prometheus.NewDesc(
+		prometheus.BuildFQName(namespace, "dish", "init_network_schedule_seconds"),
+		"Network schedule time in seconds",
+		nil, nil,
+	)
+	dishInitRfReadySeconds = prometheus.NewDesc(
+		prometheus.BuildFQName(namespace, "dish", "init_rf_ready_seconds"),
+		"RF ready time in seconds",
+		nil, nil,
+	)
+	dishInitStableConnectionSeconds = prometheus.NewDesc(
+		prometheus.BuildFQName(namespace, "dish", "init_stable_connection_seconds"),
+		"Stable connection time in seconds",
+		nil, nil,
+	)
+
 	// collectDishObstructions
 	dishCurrentlyObstructed = prometheus.NewDesc(
 		prometheus.BuildFQName(namespace, "dish", "currently_obstructed"),
@@ -196,6 +351,41 @@ var (
 		"Status of ethernet",
 		nil, nil,
 	)
+	dishAlertSlowEthernetSpeeds100 = prometheus.NewDesc(
+		prometheus.BuildFQName(namespace, "dish", "alert_slow_eth_speeds_100"),
+		"Status of 100Mbps ethernet",
+		nil, nil,
+	)
+	dishAlertRoaming = prometheus.NewDesc(
+		prometheus.BuildFQName(namespace, "dish", "alert_roaming"),
+		"Status of roaming",
+		nil, nil,
+	)
+	dishAlertInstallPending = prometheus.NewDesc(
+		prometheus.BuildFQName(namespace, "dish", "alert_install_pending"),
+		"Installation pending status",
+		nil, nil,
+	)
+	dishAlertIsHeating = prometheus.NewDesc(
+		prometheus.BuildFQName(namespace, "dish", "alert_is_heating"),
+		"Heating status",
+		nil, nil,
+	)
+	dishAlertPowerSupplyThermalThrottle = prometheus.NewDesc(
+		prometheus.BuildFQName(namespace, "dish", "alert_power_supply_thermal_throttle"),
+		"Power supply thermal throttle status",
+		nil, nil,
+	)
+	dishAlertIsPowerSaveIdle = prometheus.NewDesc(
+		prometheus.BuildFQName(namespace, "dish", "alert_is_power_save_idle"),
+		"Power save idle status",
+		nil, nil,
+	)
+	dishAlertMovingTooFast = prometheus.NewDesc(
+		prometheus.BuildFQName(namespace, "dish", "alert_moving_too_fast"),
+		"Moving too fast status",
+		nil, nil,
+	)
 )
 
 // Exporter collects Starlink stats from the Dish and exports them using
@@ -260,6 +450,45 @@ func (e *Exporter) Describe(ch chan<- *prometheus.Desc) {
 	ch <- dishBoreSightAzimuthDeg
 	ch <- dishBoreSightElevationDeg
 
+	// collectDishGPS
+	ch <- dishGpsValid
+	ch <- dishGpsSats
+	ch <- dishNoSatsAfterTtff
+	ch <- dishInhibitGps
+
+	// collectDishAlignment
+	ch <- dishTiltAngleDeg
+	ch <- dishDesiredBoreSightAzimuthDeg
+	ch <- dishDesiredBoreSightElevationDeg
+	ch <- dishActuatorState
+	ch <- dishAttitudeEstimationState
+	ch <- dishAttitudeUncertaintyDeg
+
+	// collectDishReadyStates
+	ch <- dishReadyStateCady
+	ch <- dishReadyStateScp
+	ch <- dishReadyStateL1L2
+	ch <- dishReadyStateXphy
+	ch <- dishReadyStateAap
+	ch <- dishReadyStateRf
+
+	// collectDishSoftwareUpdate
+	ch <- dishSoftwareUpdateState
+	ch <- dishSoftwareUpdateProgress
+	ch <- dishUpdateRequiresReboot
+
+	// collectDishInitialization
+	ch <- dishInitAttitudeSeconds
+	ch <- dishInitBurstDetectedSeconds
+	ch <- dishInitEkfConvergedSeconds
+	ch <- dishInitFirstCplaneSeconds
+	ch <- dishInitFirstPopPingSeconds
+	ch <- dishInitGpsValidSeconds
+	ch <- dishInitNetworkEntrySeconds
+	ch <- dishInitNetworkScheduleSeconds
+	ch <- dishInitRfReadySeconds
+	ch <- dishInitStableConnectionSeconds
+
 	// collectDishObstructions
 	ch <- dishCurrentlyObstructed
 	ch <- dishFractionObstructionRatio
@@ -277,6 +506,13 @@ func (e *Exporter) Describe(ch chan<- *prometheus.Desc) {
 	ch <- dishAlertMastNotNearVertical
 	ch <- dishUnexpectedLocation
 	ch <- dishSlowEthernetSpeeds
+	ch <- dishAlertSlowEthernetSpeeds100
+	ch <- dishAlertRoaming
+	ch <- dishAlertInstallPending
+	ch <- dishAlertIsHeating
+	ch <- dishAlertPowerSupplyThermalThrottle
+	ch <- dishAlertIsPowerSaveIdle
+	ch <- dishAlertMovingTooFast
 }
 
 // Collect fetches the stats from Starlink dish and delivers them
@@ -286,6 +522,11 @@ func (e *Exporter) Collect(ch chan<- prometheus.Metric) {
 
 	ok := e.collectDishContext(ch)
 	ok = ok && e.collectDishStatus(ch)
+	ok = ok && e.collectDishGPS(ch)
+	ok = ok && e.collectDishAlignment(ch)
+	ok = ok && e.collectDishReadyStates(ch)
+	ok = ok && e.collectDishSoftwareUpdate(ch)
+	ok = ok && e.collectDishInitialization(ch)
 	ok = ok && e.collectDishObstructions(ch)
 	ok = ok && e.collectDishAlerts(ch)
 
@@ -475,6 +716,212 @@ func (e *Exporter) collectDishObstructions(ch chan<- prometheus.Metric) bool {
 	return true
 }
 
+func (e *Exporter) collectDishGPS(ch chan<- prometheus.Metric) bool {
+	req := &device.Request{
+		Request: &device.Request_GetStatus{},
+	}
+
+	ctx, cancel := context.WithTimeout(context.Background(), time.Second*1)
+	defer cancel()
+	resp, err := e.Client.Handle(ctx, req)
+	if err != nil {
+		log.Errorf("failed to collect GPS stats from dish: %s", err.Error())
+		return false
+	}
+
+	gpsStats := resp.GetDishGetStatus().GetGpsStats()
+
+	ch <- prometheus.MustNewConstMetric(
+		dishGpsValid, prometheus.GaugeValue, flool(gpsStats.GetGpsValid()),
+	)
+
+	ch <- prometheus.MustNewConstMetric(
+		dishGpsSats, prometheus.GaugeValue, float64(gpsStats.GetGpsSats()),
+	)
+
+	ch <- prometheus.MustNewConstMetric(
+		dishNoSatsAfterTtff, prometheus.GaugeValue, flool(gpsStats.GetNoSatsAfterTtff()),
+	)
+
+	ch <- prometheus.MustNewConstMetric(
+		dishInhibitGps, prometheus.GaugeValue, flool(gpsStats.GetInhibitGps()),
+	)
+
+	return true
+}
+
+func (e *Exporter) collectDishAlignment(ch chan<- prometheus.Metric) bool {
+	req := &device.Request{
+		Request: &device.Request_GetStatus{},
+	}
+
+	ctx, cancel := context.WithTimeout(context.Background(), time.Second*1)
+	defer cancel()
+	resp, err := e.Client.Handle(ctx, req)
+	if err != nil {
+		log.Errorf("failed to collect alignment stats from dish: %s", err.Error())
+		return false
+	}
+
+	alignmentStats := resp.GetDishGetStatus().GetAlignmentStats()
+
+	ch <- prometheus.MustNewConstMetric(
+		dishTiltAngleDeg, prometheus.GaugeValue, float64(alignmentStats.GetTiltAngleDeg()),
+	)
+
+	ch <- prometheus.MustNewConstMetric(
+		dishDesiredBoreSightAzimuthDeg, prometheus.GaugeValue, float64(alignmentStats.GetDesiredBoresightAzimuthDeg()),
+	)
+
+	ch <- prometheus.MustNewConstMetric(
+		dishDesiredBoreSightElevationDeg, prometheus.GaugeValue, float64(alignmentStats.GetDesiredBoresightElevationDeg()),
+	)
+
+	ch <- prometheus.MustNewConstMetric(
+		dishActuatorState, prometheus.GaugeValue, float64(alignmentStats.GetActuatorState()),
+	)
+
+	ch <- prometheus.MustNewConstMetric(
+		dishAttitudeEstimationState, prometheus.GaugeValue, float64(alignmentStats.GetAttitudeEstimationState()),
+	)
+
+	ch <- prometheus.MustNewConstMetric(
+		dishAttitudeUncertaintyDeg, prometheus.GaugeValue, float64(alignmentStats.GetAttitudeUncertaintyDeg()),
+	)
+
+	return true
+}
+
+func (e *Exporter) collectDishReadyStates(ch chan<- prometheus.Metric) bool {
+	req := &device.Request{
+		Request: &device.Request_GetStatus{},
+	}
+
+	ctx, cancel := context.WithTimeout(context.Background(), time.Second*1)
+	defer cancel()
+	resp, err := e.Client.Handle(ctx, req)
+	if err != nil {
+		log.Errorf("failed to collect ready states from dish: %s", err.Error())
+		return false
+	}
+
+	readyStates := resp.GetDishGetStatus().GetReadyStates()
+
+	ch <- prometheus.MustNewConstMetric(
+		dishReadyStateCady, prometheus.GaugeValue, flool(readyStates.GetCady()),
+	)
+
+	ch <- prometheus.MustNewConstMetric(
+		dishReadyStateScp, prometheus.GaugeValue, flool(readyStates.GetScp()),
+	)
+
+	ch <- prometheus.MustNewConstMetric(
+		dishReadyStateL1L2, prometheus.GaugeValue, flool(readyStates.GetL1L2()),
+	)
+
+	ch <- prometheus.MustNewConstMetric(
+		dishReadyStateXphy, prometheus.GaugeValue, flool(readyStates.GetXphy()),
+	)
+
+	ch <- prometheus.MustNewConstMetric(
+		dishReadyStateAap, prometheus.GaugeValue, flool(readyStates.GetAap()),
+	)
+
+	ch <- prometheus.MustNewConstMetric(
+		dishReadyStateRf, prometheus.GaugeValue, flool(readyStates.GetRf()),
+	)
+
+	return true
+}
+
+func (e *Exporter) collectDishSoftwareUpdate(ch chan<- prometheus.Metric) bool {
+	req := &device.Request{
+		Request: &device.Request_GetStatus{},
+	}
+
+	ctx, cancel := context.WithTimeout(context.Background(), time.Second*1)
+	defer cancel()
+	resp, err := e.Client.Handle(ctx, req)
+	if err != nil {
+		log.Errorf("failed to collect software update stats from dish: %s", err.Error())
+		return false
+	}
+
+	swStats := resp.GetDishGetStatus().GetSoftwareUpdateStats()
+
+	ch <- prometheus.MustNewConstMetric(
+		dishSoftwareUpdateState, prometheus.GaugeValue, float64(swStats.GetSoftwareUpdateState()),
+	)
+
+	ch <- prometheus.MustNewConstMetric(
+		dishSoftwareUpdateProgress, prometheus.GaugeValue, float64(swStats.GetSoftwareUpdateProgress()),
+	)
+
+	ch <- prometheus.MustNewConstMetric(
+		dishUpdateRequiresReboot, prometheus.GaugeValue, flool(swStats.GetUpdateRequiresReboot()),
+	)
+
+	return true
+}
+
+func (e *Exporter) collectDishInitialization(ch chan<- prometheus.Metric) bool {
+	req := &device.Request{
+		Request: &device.Request_GetStatus{},
+	}
+
+	ctx, cancel := context.WithTimeout(context.Background(), time.Second*1)
+	defer cancel()
+	resp, err := e.Client.Handle(ctx, req)
+	if err != nil {
+		log.Errorf("failed to collect initialization stats from dish: %s", err.Error())
+		return false
+	}
+
+	initStats := resp.GetDishGetStatus().GetInitializationDurationSeconds()
+
+	ch <- prometheus.MustNewConstMetric(
+		dishInitAttitudeSeconds, prometheus.GaugeValue, float64(initStats.GetAttitudeInitialization()),
+	)
+
+	ch <- prometheus.MustNewConstMetric(
+		dishInitBurstDetectedSeconds, prometheus.GaugeValue, float64(initStats.GetBurstDetected()),
+	)
+
+	ch <- prometheus.MustNewConstMetric(
+		dishInitEkfConvergedSeconds, prometheus.GaugeValue, float64(initStats.GetEkfConverged()),
+	)
+
+	ch <- prometheus.MustNewConstMetric(
+		dishInitFirstCplaneSeconds, prometheus.GaugeValue, float64(initStats.GetFirstCplane()),
+	)
+
+	ch <- prometheus.MustNewConstMetric(
+		dishInitFirstPopPingSeconds, prometheus.GaugeValue, float64(initStats.GetFirstPopPing()),
+	)
+
+	ch <- prometheus.MustNewConstMetric(
+		dishInitGpsValidSeconds, prometheus.GaugeValue, float64(initStats.GetGpsValid()),
+	)
+
+	ch <- prometheus.MustNewConstMetric(
+		dishInitNetworkEntrySeconds, prometheus.GaugeValue, float64(initStats.GetInitialNetworkEntry()),
+	)
+
+	ch <- prometheus.MustNewConstMetric(
+		dishInitNetworkScheduleSeconds, prometheus.GaugeValue, float64(initStats.GetNetworkSchedule()),
+	)
+
+	ch <- prometheus.MustNewConstMetric(
+		dishInitRfReadySeconds, prometheus.GaugeValue, float64(initStats.GetRfReady()),
+	)
+
+	ch <- prometheus.MustNewConstMetric(
+		dishInitStableConnectionSeconds, prometheus.GaugeValue, float64(initStats.GetStableConnection()),
+	)
+
+	return true
+}
+
 func (e *Exporter) collectDishAlerts(ch chan<- prometheus.Metric) bool {
 	req := &device.Request{
 		Request: &device.Request_GetStatus{},
@@ -512,6 +959,34 @@ func (e *Exporter) collectDishAlerts(ch chan<- prometheus.Metric) bool {
 
 	ch <- prometheus.MustNewConstMetric(
 		dishSlowEthernetSpeeds, prometheus.GaugeValue, flool(alerts.GetSlowEthernetSpeeds()),
+	)
+
+	ch <- prometheus.MustNewConstMetric(
+		dishAlertSlowEthernetSpeeds100, prometheus.GaugeValue, flool(alerts.GetSlowEthernetSpeeds100()),
+	)
+
+	ch <- prometheus.MustNewConstMetric(
+		dishAlertRoaming, prometheus.GaugeValue, flool(alerts.GetRoaming()),
+	)
+
+	ch <- prometheus.MustNewConstMetric(
+		dishAlertInstallPending, prometheus.GaugeValue, flool(alerts.GetInstallPending()),
+	)
+
+	ch <- prometheus.MustNewConstMetric(
+		dishAlertIsHeating, prometheus.GaugeValue, flool(alerts.GetIsHeating()),
+	)
+
+	ch <- prometheus.MustNewConstMetric(
+		dishAlertPowerSupplyThermalThrottle, prometheus.GaugeValue, flool(alerts.GetPowerSupplyThermalThrottle()),
+	)
+
+	ch <- prometheus.MustNewConstMetric(
+		dishAlertIsPowerSaveIdle, prometheus.GaugeValue, flool(alerts.GetIsPowerSaveIdle()),
+	)
+
+	ch <- prometheus.MustNewConstMetric(
+		dishAlertMovingTooFast, prometheus.GaugeValue, flool(alerts.GetMovingTooFastForPolicy()),
 	)
 
 	return true
